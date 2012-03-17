@@ -85,7 +85,6 @@ namespace MobileDictMaker
                 if (fileName.Equals("") == false & bAlert == false & bExist == false)
                     controlAdd(true);
                     
-
             }  
 
         }
