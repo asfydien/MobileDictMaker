@@ -1,0 +1,9 @@
+D:\Asfydien\MobileDictMaker\bin\Debug\MobileDictMaker.exe
+D:\Asfydien\MobileDictMaker\bin\Debug\MobileDictMaker.pdb
+D:\Asfydien\MobileDictMaker\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Asfydien\MobileDictMaker\obj\x86\Debug\MobileDictMaker.Form1.resources
+D:\Asfydien\MobileDictMaker\obj\x86\Debug\MobileDictMaker.Properties.Resources.resources
+D:\Asfydien\MobileDictMaker\obj\x86\Debug\ResGen.read.1.tlog
+D:\Asfydien\MobileDictMaker\obj\x86\Debug\ResGen.write.1.tlog
+D:\Asfydien\MobileDictMaker\obj\x86\Debug\MobileDictMaker.exe
+D:\Asfydien\MobileDictMaker\obj\x86\Debug\MobileDictMaker.pdb

@@ -36,6 +36,8 @@
             this.tbSeparator = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tbDictInfo = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tbDictName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.nudMaxLen = new System.Windows.Forms.NumericUpDown();
@@ -45,17 +47,16 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tbMidletDesc = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbMidletName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.tbDictInfo = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.ch5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaxLen)).BeginInit();
@@ -65,6 +66,7 @@
             // 
             // btnBuild
             // 
+            this.btnBuild.Enabled = false;
             this.btnBuild.Location = new System.Drawing.Point(351, 164);
             this.btnBuild.Name = "btnBuild";
             this.btnBuild.Size = new System.Drawing.Size(100, 73);
@@ -72,7 +74,7 @@
             this.btnBuild.Text = "Build Jar";
             this.btnBuild.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBuild.UseVisualStyleBackColor = true;
-            this.btnBuild.Click += new System.EventHandler(this.btnCreate_Click);
+            this.btnBuild.Click += new System.EventHandler(this.btnBuild_Click);
             // 
             // groupBox1
             // 
@@ -149,6 +151,26 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Create";
             // 
+            // tbDictInfo
+            // 
+            this.tbDictInfo.Enabled = false;
+            this.tbDictInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbDictInfo.Location = new System.Drawing.Point(172, 40);
+            this.tbDictInfo.Name = "tbDictInfo";
+            this.tbDictInfo.Size = new System.Drawing.Size(149, 20);
+            this.tbDictInfo.TabIndex = 11;
+            this.tbDictInfo.TextChanged += new System.EventHandler(this.tbDictInfo_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(169, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(28, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Info:";
+            // 
             // tbDictName
             // 
             this.tbDictName.Enabled = false;
@@ -157,6 +179,7 @@
             this.tbDictName.Name = "tbDictName";
             this.tbDictName.Size = new System.Drawing.Size(149, 20);
             this.tbDictName.TabIndex = 9;
+            this.tbDictName.TextChanged += new System.EventHandler(this.tbDictName_TextChanged);
             // 
             // label1
             // 
@@ -189,7 +212,6 @@
             // 
             // nudMaxLine
             // 
-            this.nudMaxLine.Enabled = false;
             this.nudMaxLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudMaxLine.Location = new System.Drawing.Point(17, 112);
             this.nudMaxLine.Maximum = new decimal(new int[] {
@@ -258,10 +280,11 @@
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
+            this.ch1,
+            this.ch2,
+            this.ch3,
+            this.ch4,
+            this.ch5});
             this.listView1.Enabled = false;
             this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listView1.Location = new System.Drawing.Point(17, 24);
@@ -271,23 +294,24 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader1
+            // ch1
             // 
-            this.columnHeader1.Text = "Dictionary";
-            this.columnHeader1.Width = 200;
+            this.ch1.Text = "Dictionary";
+            this.ch1.Width = 120;
             // 
-            // columnHeader3
+            // ch2
             // 
-            this.columnHeader3.Text = "Hash";
-            this.columnHeader3.Width = 100;
+            this.ch2.Text = "Info";
+            this.ch2.Width = 120;
             // 
-            // columnHeader4
+            // ch3
             // 
-            this.columnHeader4.Text = "Line";
+            this.ch3.Text = "Hash";
+            this.ch3.Width = 70;
             // 
-            // columnHeader5
+            // ch4
             // 
-            this.columnHeader5.Text = "Part";
+            this.ch4.Text = "Line";
             // 
             // tbMidletDesc
             // 
@@ -333,24 +357,10 @@
             // 
             this.openFileDialog1.Title = "Open";
             // 
-            // tbDictInfo
+            // ch5
             // 
-            this.tbDictInfo.Enabled = false;
-            this.tbDictInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDictInfo.Location = new System.Drawing.Point(172, 40);
-            this.tbDictInfo.Name = "tbDictInfo";
-            this.tbDictInfo.Size = new System.Drawing.Size(149, 20);
-            this.tbDictInfo.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(169, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(28, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Info:";
+            this.ch5.Text = "Part";
+            this.ch5.Width = 50;
             // 
             // Form1
             // 
@@ -388,9 +398,9 @@
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader ch1;
+        private System.Windows.Forms.ColumnHeader ch2;
+        private System.Windows.Forms.ColumnHeader ch3;
         private System.Windows.Forms.NumericUpDown nudMaxLen;
         private System.Windows.Forms.NumericUpDown nudMaxLine;
         private System.Windows.Forms.Label label4;
@@ -405,9 +415,10 @@
         private System.Windows.Forms.TextBox tbFileSrc;
         private System.Windows.Forms.TextBox tbDictName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader ch4;
         private System.Windows.Forms.TextBox tbDictInfo;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ColumnHeader ch5;
     }
 }
 

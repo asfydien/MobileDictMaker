@@ -25,6 +25,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using Ionic.Utils.Zip;
 
 namespace MobileDictMaker
 {
@@ -83,7 +84,10 @@ namespace MobileDictMaker
                     }
 
                 if (fileName.Equals("") == false & bAlert == false & bExist == false)
+                {
                     controlAdd(true);
+                    btnAdd.Enabled = false;
+                }
                     
             }  
 
@@ -147,8 +151,9 @@ namespace MobileDictMaker
             Application.DoEvents();
             btnAdd.Enabled = true;
 
-            // tambahkan ke list
+            // tambahkan ke listview
             ListViewItem lsItem = listView1.Items.Add(tbDictName.Text);
+            lsItem.SubItems.Add(tbDictInfo.Text);
             lsItem.SubItems.Add(hash.ToString());
             lsItem.SubItems.Add(src.Length.ToString());
             lsItem.SubItems.Add(nPath.ToString());
@@ -157,14 +162,22 @@ namespace MobileDictMaker
             src = null;
             tbFileSrc.Text = "";
             tbDictName.Text = "";
+            tbDictInfo.Text = "";
 
             controlAdd(false);
             controlBuild(true);
 
         }
 
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void btnBuild_Click(object sender, EventArgs e)
         {
+
+            if (tbMidletName.Text.Trim().Length == 0 & tbMidletName.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Name or Description...?", "Build", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // # manifes
             string manifes = "Manifest-Version: 1.0\n" +
                             "Ant-Version: Apache Ant 1.8.2\n" +
@@ -189,7 +202,7 @@ namespace MobileDictMaker
                             "MicroEdition-Configuration: CLDC-1.1\n" +
                             "MicroEdition-Profile: MIDP-2.0\n";
 
-            //
+            // save manifest
             btnBuild.Enabled = false;
 
             manifes = string.Format(manifes, tbMidletName.Text, tbMidletDesc.Text);
@@ -199,7 +212,7 @@ namespace MobileDictMaker
 
             File.WriteAllText(tmpPath + @"\META-INF\MANIFEST.MF", manifes);
 
-            // # config
+            // save config
             string config = "";
 
             foreach (ListViewItem lsItem in listView1.Items)
@@ -212,25 +225,32 @@ namespace MobileDictMaker
 
             string targetName = tbMidletName.Text + ".jar";
 
-            if (File.Exists(appPath + targetName))
-                File.Delete(appPath + targetName);
+            // delete old
+            try
+            {
+                if (File.Exists(appPath + targetName))
+                    File.Delete(appPath + targetName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Build", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                btnBuild.Enabled = true;
+                return;
+            }
 
-            ProcessStartInfo p = new ProcessStartInfo();
+            // extract
+            using (ZipFile zip = ZipFile.Read("dist.bin"))
+            {
+                foreach (ZipEntry z in zip)
+                    z.Extract("dist", true);  // overwrite == true  
+            }
 
-            p.FileName = "7za.exe";
-            p.WindowStyle = ProcessWindowStyle.Hidden;
-
-            // extract bin
-            p.Arguments = @"x -t7z dist.bin -o""" + tmpPath + "";
-            
-            Process x = Process.Start(p);
-            x.WaitForExit();
-
-            // make jar
-            p.Arguments = @"a -tzip " + targetName + @" .\dist\*"; 
-            
-            x = Process.Start(p);
-            x.WaitForExit();
+            // zip
+            using (ZipFile zip = new ZipFile(targetName))
+            {
+                zip.AddDirectory("dist", "");
+                zip.Save();
+            }  
 
             // make jad
             FileInfo fi = new FileInfo(appPath + targetName);
@@ -254,6 +274,19 @@ namespace MobileDictMaker
 
         }
 
+        private void tbDictName_TextChanged(object sender, EventArgs e)
+        {
+            if (tbDictName.Text.Length > 0 & tbDictInfo.Text.Length > 0)
+                btnAdd.Enabled = true;
+            else
+                btnAdd.Enabled = false;
+        }
+
+        private void tbDictInfo_TextChanged(object sender, EventArgs e)
+        {
+            tbDictName_TextChanged(sender, e);
+        }
+
         // 
         void controlAdd(bool b)
         {
@@ -271,6 +304,8 @@ namespace MobileDictMaker
             tbMidletDesc.Enabled = b;
             btnBuild.Enabled = b;
         }
+
+        
 
     }
 }
