@@ -1,0 +1,10 @@
+Tool untuk meng customize data kamus Karmix (Kabayan Remix) supaya dapa di isi dengan kamus sesuai kebutuhan
+
+Kebutuhan Sistem:
+  - Microsoft .NET Framework Version 2.0
+  - DotNetZip Library (http://dotnetzip.codeplex.com/)
+
+Tool untuk mencoba hasil kustomisasi:
+  - KEmulator (http://code.google.com/p/kabayan/downloads/detail?name=KEmulator-Lite-v0.9.8.zip&can=1&q=)
+
+License GNU GPLv3

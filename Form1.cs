@@ -216,7 +216,8 @@ namespace MobileDictMaker
             string config = "";
 
             foreach (ListViewItem lsItem in listView1.Items)
-                config += lsItem.SubItems[0].Text + "#" + lsItem.SubItems[1].Text + "\n";
+                // name#hash|info
+                config += lsItem.SubItems[0].Text + "#" + lsItem.SubItems[2].Text + "|" + lsItem.SubItems[1].Text + "\n";
 
             File.WriteAllText(tmpPath + "config", config);
 
