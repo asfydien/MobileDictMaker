@@ -25,7 +25,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
-using Ionic.Utils.Zip;
+using Ionic.Zip;
 
 namespace MobileDictMaker
 {
@@ -243,7 +243,7 @@ namespace MobileDictMaker
             using (ZipFile zip = ZipFile.Read("dist.bin"))
             {
                 foreach (ZipEntry z in zip)
-                    z.Extract("dist", true);  // overwrite == true  
+                    z.Extract("dist");  // overwrite == true  
             }
 
             // zip
