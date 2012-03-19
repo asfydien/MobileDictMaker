@@ -46,17 +46,19 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cboxTemplate = new System.Windows.Forms.ComboBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.ch1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tbMidletDesc = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbMidletName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.ch5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaxLen)).BeginInit();
@@ -263,6 +265,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.cboxTemplate);
             this.groupBox3.Controls.Add(this.listView1);
             this.groupBox3.Controls.Add(this.tbMidletDesc);
             this.groupBox3.Controls.Add(this.label7);
@@ -276,6 +280,30 @@
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Build";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(169, 148);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(54, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Template:";
+            // 
+            // cboxTemplate
+            // 
+            this.cboxTemplate.Enabled = false;
+            this.cboxTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxTemplate.FormattingEnabled = true;
+            this.cboxTemplate.Items.AddRange(new object[] {
+            "Karmix-0.1.6",
+            "Kabayan-0.1.7"});
+            this.cboxTemplate.Location = new System.Drawing.Point(172, 164);
+            this.cboxTemplate.Name = "cboxTemplate";
+            this.cboxTemplate.Size = new System.Drawing.Size(149, 21);
+            this.cboxTemplate.TabIndex = 9;
+            this.cboxTemplate.Text = "Karmix-0.1.6";
             // 
             // listView1
             // 
@@ -297,21 +325,25 @@
             // ch1
             // 
             this.ch1.Text = "Dictionary";
-            this.ch1.Width = 120;
+            this.ch1.Width = 125;
             // 
             // ch2
             // 
             this.ch2.Text = "Info";
-            this.ch2.Width = 120;
+            this.ch2.Width = 125;
             // 
             // ch3
             // 
-            this.ch3.Text = "Hash";
-            this.ch3.Width = 70;
+            this.ch3.Text = "Number";
             // 
             // ch4
             // 
             this.ch4.Text = "Line";
+            // 
+            // ch5
+            // 
+            this.ch5.Text = "Part";
+            this.ch5.Width = 50;
             // 
             // tbMidletDesc
             // 
@@ -357,11 +389,6 @@
             // 
             this.openFileDialog1.Title = "Open";
             // 
-            // ch5
-            // 
-            this.ch5.Text = "Part";
-            this.ch5.Width = 50;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -370,9 +397,11 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MobileDictMaker (J2ME)";
@@ -419,6 +448,8 @@
         private System.Windows.Forms.TextBox tbDictInfo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ColumnHeader ch5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cboxTemplate;
     }
 }
 

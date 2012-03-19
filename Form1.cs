@@ -18,21 +18,16 @@
 
 using System;
 using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.Diagnostics;
-using Ionic.Zip;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace MobileDictMaker
 {
     public partial class Form1 : Form
     {
         string appPath, tmpPath;
-        string fileName;
+        string fileName, safeFileName;
         string[] src;
 
         public Form1()
@@ -42,8 +37,8 @@ namespace MobileDictMaker
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            appPath = Application.StartupPath + @"\";
-            tmpPath = appPath + @"\dist\";
+            appPath = Application.StartupPath + "/";
+            tmpPath = appPath + "/dist/";
 
             if (Directory.Exists(tmpPath))
                 Directory.Delete(tmpPath, true);
@@ -57,6 +52,7 @@ namespace MobileDictMaker
             openFileDialog1.ShowDialog(this);
 
             fileName = openFileDialog1.FileName;
+            safeFileName = openFileDialog1.SafeFileName;
 
             if (File.Exists(fileName))
             {
@@ -65,7 +61,7 @@ namespace MobileDictMaker
                 for (int i = 0; i < src.Length; i++)
                     if (!src[i].Contains(tbSeparator.Text))
                     {
-                        MessageBox.Show(this, "baris " + (i + 1) + " tanpa separator!", "Info",
+                        MessageBox.Show(this, "Line " + (i + 1) + " without separator!", "Info",
                                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         bAlert = true;
                         break;
@@ -76,10 +72,10 @@ namespace MobileDictMaker
                 if (listView1.Items.Count>0)
                     foreach (ListViewItem lsItem in listView1.Items)
                     {
-                        int hash = fileName.GetHashCode();
+                        int hash = safeFileName.GetHashCode();
                         if (hash < 0) hash *= -1;
 
-                        if (lsItem.SubItems[1].Text.Equals(hash.ToString()))
+                        if (lsItem.Tag.Equals(hash.ToString()))
                             bExist = true;
                     }
 
@@ -95,22 +91,28 @@ namespace MobileDictMaker
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            int n = 0, nPath=0;
-            int hash = fileName.GetHashCode();
+            string sPart = "", sIndex = "", idxFrom = "", idxTo = "";
+            string dicPath = tmpPath + "/dic/";
+
             string[] texts;
-            string sPart = "", sIndex = "";
-            string sFirst = "", sEnd = "";
-            string dicPath = tmpPath + @"\dic\";
+
+            int n = 0, nPath = 0;
+            int hash = safeFileName.GetHashCode();
+
+            if (hash < 0) hash *= -1;
 
             if (!Directory.Exists(dicPath))
                 Directory.CreateDirectory(dicPath);
 
-            if (hash < 0) hash *= -1;
+            
 
             btnAdd.Enabled = false;
 
             texts = src[0].Split(new string[] {tbSeparator.Text}, StringSplitOptions.None);
-            sFirst = texts[0];
+            idxFrom = texts[0];
+
+            // dict number
+            string dictNum = "0" + (listView1.Items.Count +1).ToString();
 
             for (int i = 0; i < src.Length; i++)
             {
@@ -122,19 +124,19 @@ namespace MobileDictMaker
                 {
                     nPath++;
 
-                    File.WriteAllText(dicPath + hash.ToString() + "x" + nPath, sPart);
+                    File.WriteAllText(dicPath + dictNum + "x" + nPath, sPart);
 
-                    sIndex += sFirst + "#" + sEnd + "#" + nPath + "\n";
+                    sIndex += idxFrom + "#" + idxTo + "#" + nPath + "\n";
 
                     sPart = texts[0] + "#" + texts[1];
-                    sFirst = texts[0];
+                    idxFrom = texts[0];
 
                     n = 0;
                 }
                 else
                 {
                     sPart += texts[0] + "#" + texts[1] + "\n";
-                    sEnd = texts[0];
+                    idxTo = texts[0];
                 }
 
             }
@@ -142,19 +144,20 @@ namespace MobileDictMaker
             if (sPart != "")
             {
                 nPath++;
-                File.WriteAllText(dicPath + hash.ToString() + "x" + nPath, sPart);
-                sIndex += sFirst + "#" + sEnd + "#" + nPath + "\n";  
+                File.WriteAllText(dicPath + dictNum + "x" + nPath, sPart);
+                sIndex += idxFrom + "#" + idxTo + "#" + nPath + "\n";  
             }
 
-            File.WriteAllText(tmpPath + hash.ToString(), sIndex);
+            File.WriteAllText(tmpPath + dictNum, sIndex);
 
             Application.DoEvents();
             btnAdd.Enabled = true;
 
             // tambahkan ke listview
             ListViewItem lsItem = listView1.Items.Add(tbDictName.Text);
+            lsItem.Tag = hash.ToString();
             lsItem.SubItems.Add(tbDictInfo.Text);
-            lsItem.SubItems.Add(hash.ToString());
+            lsItem.SubItems.Add(dictNum);
             lsItem.SubItems.Add(src.Length.ToString());
             lsItem.SubItems.Add(nPath.ToString());
 
@@ -174,20 +177,21 @@ namespace MobileDictMaker
 
             if (tbMidletName.Text.Trim().Length == 0 & tbMidletName.Text.Trim().Length == 0)
             {
-                MessageBox.Show("Name or Description...?", "Build", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Name or Description...?", "Build", 
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // # manifes
             string manifes = "Manifest-Version: 1.0\n" +
                             "Ant-Version: Apache Ant 1.8.2\n" +
-                            "Created-By: 1.7.0_02-b13 (Oracle Corporation)\n" +
+                            "Created-By: 1.7.0 (Oracle Corporation)\n" +
                             "MIDlet-1: Kabayan,/img/logo.png,bin.logic.Kabayan\n" +
                             "MIDlet-Vendor: Sofyan\n" +
                             "MIDlet-Info-URL: http://code.google.com/p/kabayan\n" +
                             "MIDlet-Name: {0}\n" +
                             "MIDlet-Description: {1}\n" +
-                            "MIDlet-Version: 0.1.7\n" +
+                            "MIDlet-Version: {2}\n" +
                             "MicroEdition-Configuration: CLDC-1.1\n" +
                             "MicroEdition-Profile: MIDP-2.0\n";
 
@@ -198,25 +202,25 @@ namespace MobileDictMaker
                             "MIDlet-Jar-URL: {2}\n" +
                             "MIDlet-Name: {3}\n" +
                             "MIDlet-Vendor: Sofyan\n" +
-                            "MIDlet-Version: 0.1.7\n" +
+                            "MIDlet-Version: {4}\n" +
                             "MicroEdition-Configuration: CLDC-1.1\n" +
                             "MicroEdition-Profile: MIDP-2.0\n";
+
+            string config = "";
+            FastZip fz = new FastZip();
 
             // save manifest
             btnBuild.Enabled = false;
 
-            manifes = string.Format(manifes, tbMidletName.Text, tbMidletDesc.Text);
+            manifes = string.Format(manifes, tbMidletName.Text, tbMidletDesc.Text, "0.1.6");
 
-            if (!Directory.Exists(tmpPath + @"\META-INF\"))
-                Directory.CreateDirectory(tmpPath + @"\META-INF\");
+            if (!Directory.Exists(tmpPath + "/META-INF/"))
+                Directory.CreateDirectory(tmpPath + "/META-INF/");
 
-            File.WriteAllText(tmpPath + @"\META-INF\MANIFEST.MF", manifes);
+            File.WriteAllText(tmpPath + "/META-INF/MANIFEST.MF", manifes);
 
             // save config
-            string config = "";
-
             foreach (ListViewItem lsItem in listView1.Items)
-                // name#hash|info
                 config += lsItem.SubItems[0].Text + "#" + lsItem.SubItems[2].Text + "|" + lsItem.SubItems[1].Text + "\n";
 
             File.WriteAllText(tmpPath + "config", config);
@@ -239,39 +243,54 @@ namespace MobileDictMaker
                 return;
             }
 
-            // extract
-            using (ZipFile zip = ZipFile.Read("dist.bin"))
-            {
-                foreach (ZipEntry z in zip)
-                    z.Extract("dist");  // overwrite == true  
+            // mono
+            Directory.SetCurrentDirectory(appPath);
+
+            // extract resource
+            switch (cboxTemplate.SelectedIndex){
+                case 0: 
+                    File.WriteAllBytes("dist_", MobileDictMaker.Properties.Resources.Karmix_0_1_6);
+                    break;
+                case 1:
+                    File.WriteAllBytes("dist_", MobileDictMaker.Properties.Resources.Kabayan_0_1_7);
+                    break;
+
             }
 
+            fz.ExtractZip("dist_", "dist", "");
+
             // zip
-            using (ZipFile zip = new ZipFile(targetName))
+            fz.CreateZip(targetName, "dist", true, "");
+
+            // make jad and confirm
+            try
             {
-                zip.AddDirectory("dist", "");
-                zip.Save();
-            }  
+                FileInfo fi = new FileInfo(appPath + targetName);
 
-            // make jad
-            FileInfo fi = new FileInfo(appPath + targetName);
+                jadfile = string.Format(jadfile, tbMidletDesc.Text, fi.Length, targetName, tbMidletName.Text, "0.1.6");
 
-            jadfile = string.Format(jadfile, tbMidletDesc.Text, fi.Length, targetName, tbMidletName.Text);
+                File.WriteAllText(appPath + tbMidletName.Text + ".jad", jadfile);
 
-            File.WriteAllText(appPath + tbMidletName.Text + ".jad", jadfile);
+                Application.DoEvents();
+
+                if (fi.Length > 0)
+                    MessageBox.Show("Output : " + targetName, "Build",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch { }
 
             // clean
             if (Directory.Exists(tmpPath))
                 Directory.Delete(tmpPath, true);
 
-            // finish
-            Application.DoEvents();
-            MessageBox.Show("Output : " + targetName, "Build", 
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (File.Exists("dist_"))
+                File.Delete("dist_");
 
             // reset
             listView1.Items.Clear();
             controlBuild(false);
+            fileName = "";
+            safeFileName = "";
 
         }
 
@@ -303,10 +322,10 @@ namespace MobileDictMaker
             listView1.Enabled = b;
             tbMidletName.Enabled = b;
             tbMidletDesc.Enabled = b;
+            cboxTemplate.Enabled = b;
             btnBuild.Enabled = b;
         }
 
-        
 
     }
 }
