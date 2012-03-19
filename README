@@ -1,17 +1,16 @@
-Tool untuk meng customize data kamus Karmix (Kabayan Remix) supaya dapa di isi dengan kamus sesuai kebutuhan
+Tool untuk meng customize data kamus Karmix (Kabayan Remix) supaya dapat di isi dengan kamus sesuai kebutuhan
 
 Kebutuhan Sistem:
   # Windows (32/64)
     - Microsoft .NET Framework Version 2.0
   
-  # Linux
-    - openSUSE 12.1 (distro lain belum di coba, harusnya bisa)
+  # Linux openSUSE 12.1 (distro lain belum di coba, harusnya bisa)
     - Mono 2.10 + WinForm 2.0
 
     - SharpZipLib Library (http://www.icsharpcode.net/opensource/sharpziplib/)
 
 
 Tool untuk mencoba hasil kustomisasi:
-  - KEmulator (http://code.google.com/p/kabayan/downloads/detail?name=KEmulator-Lite-v0.9.8.zip&can=1&q=)
+- KEmulator (http://code.google.com/p/kabayan/downloads/detail?name=KEmulator-Lite-v0.9.8.zip&can=1&q=)
 
 License GNU GPLv3
