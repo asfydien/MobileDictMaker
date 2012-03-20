@@ -326,6 +326,11 @@ namespace MobileDictMaker
             btnBuild.Enabled = b;
         }
 
+        private void llblHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/asfydien/MobileDictMaker/wiki");
+        }
+
 
     }
 }

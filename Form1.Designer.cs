@@ -59,6 +59,7 @@
             this.tbMidletName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.llblHelp = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaxLen)).BeginInit();
@@ -214,6 +215,7 @@
             // 
             // nudMaxLine
             // 
+            this.nudMaxLine.Enabled = false;
             this.nudMaxLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudMaxLine.Location = new System.Drawing.Point(17, 112);
             this.nudMaxLine.Maximum = new decimal(new int[] {
@@ -303,7 +305,7 @@
             this.cboxTemplate.Name = "cboxTemplate";
             this.cboxTemplate.Size = new System.Drawing.Size(149, 21);
             this.cboxTemplate.TabIndex = 9;
-            this.cboxTemplate.Text = "Karmix-0.1.6";
+            this.cboxTemplate.Text = "Kabayan-0.1.7";
             // 
             // listView1
             // 
@@ -389,11 +391,23 @@
             // 
             this.openFileDialog1.Title = "Open";
             // 
+            // llblHelp
+            // 
+            this.llblHelp.AutoSize = true;
+            this.llblHelp.Location = new System.Drawing.Point(418, 538);
+            this.llblHelp.Name = "llblHelp";
+            this.llblHelp.Size = new System.Drawing.Size(62, 13);
+            this.llblHelp.TabIndex = 4;
+            this.llblHelp.TabStop = true;
+            this.llblHelp.Text = "Online Help";
+            this.llblHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llblHelp_LinkClicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(492, 543);
+            this.ClientSize = new System.Drawing.Size(492, 560);
+            this.Controls.Add(this.llblHelp);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -415,6 +429,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -450,6 +465,7 @@
         private System.Windows.Forms.ColumnHeader ch5;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cboxTemplate;
+        private System.Windows.Forms.LinkLabel llblHelp;
     }
 }
 
