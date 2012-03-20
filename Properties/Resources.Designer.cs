@@ -67,6 +67,13 @@ namespace MobileDictMaker.Properties {
             }
         }
         
+        public static byte[] KabayanLE_0_1 {
+            get {
+                object obj = ResourceManager.GetObject("KabayanLE_0_1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         public static byte[] Karmix_0_1_6 {
             get {
                 object obj = ResourceManager.GetObject("Karmix_0_1_6", resourceCulture);

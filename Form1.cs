@@ -186,38 +186,31 @@ namespace MobileDictMaker
             string manifes = "Manifest-Version: 1.0\n" +
                             "Ant-Version: Apache Ant 1.8.2\n" +
                             "Created-By: 1.7.0 (Oracle Corporation)\n" +
-                            "MIDlet-1: Kabayan,/img/logo.png,bin.logic.Kabayan\n" +
+                            "MIDlet-1: {0}\n" +
                             "MIDlet-Vendor: Sofyan\n" +
                             "MIDlet-Info-URL: http://code.google.com/p/kabayan\n" +
-                            "MIDlet-Name: {0}\n" +
+                            "MIDlet-Name: {1}\n" +
+                            "MIDlet-Description: {2}\n" +
+                            "MIDlet-Version: {3}\n" +
+                            "MicroEdition-Configuration: CLDC-1.1\n" +
+                            "MicroEdition-Profile: MIDP-2.0\n";
+
+            string jadfile = "MIDlet-1: {0}\n" +
                             "MIDlet-Description: {1}\n" +
-                            "MIDlet-Version: {2}\n" +
-                            "MicroEdition-Configuration: CLDC-1.1\n" +
-                            "MicroEdition-Profile: MIDP-2.0\n";
-
-            string jadfile = "MIDlet-1: Kabayan,/img/logo.png,bin.logic.Kabayan\n" +
-                            "MIDlet-Description: {0}\n" +
                             "MIDlet-Info-URL: http://code.google.com/p/kabayan\n" +
-                            "MIDlet-Jar-Size: {1}\n" +
-                            "MIDlet-Jar-URL: {2}\n" +
-                            "MIDlet-Name: {3}\n" +
+                            "MIDlet-Jar-Size: {2}\n" +
+                            "MIDlet-Jar-URL: {3}\n" +
+                            "MIDlet-Name: {4}\n" +
                             "MIDlet-Vendor: Sofyan\n" +
-                            "MIDlet-Version: {4}\n" +
+                            "MIDlet-Version: {5}\n" +
                             "MicroEdition-Configuration: CLDC-1.1\n" +
                             "MicroEdition-Profile: MIDP-2.0\n";
 
-            string config = "";
+            string config = "", ver = "", midlet1 = "Kabayan,/img/logo.png,bin.logic.Kabayan";
             FastZip fz = new FastZip();
 
-            // save manifest
+           
             btnBuild.Enabled = false;
-
-            manifes = string.Format(manifes, tbMidletName.Text, tbMidletDesc.Text, "0.1.6");
-
-            if (!Directory.Exists(tmpPath + "/META-INF/"))
-                Directory.CreateDirectory(tmpPath + "/META-INF/");
-
-            File.WriteAllText(tmpPath + "/META-INF/MANIFEST.MF", manifes);
 
             // save config
             foreach (ListViewItem lsItem in listView1.Items)
@@ -250,14 +243,30 @@ namespace MobileDictMaker
             switch (cboxTemplate.SelectedIndex){
                 case 0: 
                     File.WriteAllBytes("dist_", MobileDictMaker.Properties.Resources.Karmix_0_1_6);
+                    ver = "0.1.6";
                     break;
                 case 1:
                     File.WriteAllBytes("dist_", MobileDictMaker.Properties.Resources.Kabayan_0_1_7);
+                    ver = "0.1.7";
+                    break;
+                case 2:
+                    File.WriteAllBytes("dist_", MobileDictMaker.Properties.Resources.KabayanLE_0_1);
+                    midlet1 = "Kabayan,/img/logo.png,Kabayan";
+                    ver = "0.1.6";
                     break;
 
             }
 
             fz.ExtractZip("dist_", "dist", "");
+
+            // save manifest
+            manifes = string.Format(manifes, midlet1, tbMidletName.Text, tbMidletDesc.Text, ver);
+
+            if (!Directory.Exists(tmpPath + "/META-INF/"))
+                Directory.CreateDirectory(tmpPath + "/META-INF/");
+
+            File.WriteAllText(tmpPath + "/META-INF/MANIFEST.MF", manifes);
+
 
             // zip
             fz.CreateZip(targetName, "dist", true, "");
@@ -267,7 +276,7 @@ namespace MobileDictMaker
             {
                 FileInfo fi = new FileInfo(appPath + targetName);
 
-                jadfile = string.Format(jadfile, tbMidletDesc.Text, fi.Length, targetName, tbMidletName.Text, "0.1.6");
+                jadfile = string.Format(jadfile, midlet1, tbMidletDesc.Text, fi.Length, targetName, tbMidletName.Text, ver);
 
                 File.WriteAllText(appPath + tbMidletName.Text + ".jad", jadfile);
 

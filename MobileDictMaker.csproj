@@ -67,6 +67,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Kabayan-0.1.7.jar_" />
+    <None Include="KabayanLE-0.1.jar_" />
     <None Include="Karmix-0.1.6.jar_" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

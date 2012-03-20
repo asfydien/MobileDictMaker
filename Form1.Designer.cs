@@ -300,7 +300,8 @@
             this.cboxTemplate.FormattingEnabled = true;
             this.cboxTemplate.Items.AddRange(new object[] {
             "Karmix-0.1.6",
-            "Kabayan-0.1.7"});
+            "Kabayan-0.1.7",
+            "KabayanLE-0.1"});
             this.cboxTemplate.Location = new System.Drawing.Point(172, 164);
             this.cboxTemplate.Name = "cboxTemplate";
             this.cboxTemplate.Size = new System.Drawing.Size(149, 21);
