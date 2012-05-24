@@ -60,6 +60,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.llblHelp = new System.Windows.Forms.LinkLabel();
+            this.llblAbout = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaxLen)).BeginInit();
@@ -70,6 +71,7 @@
             // btnBuild
             // 
             this.btnBuild.Enabled = false;
+            this.btnBuild.FlatAppearance.BorderSize = 0;
             this.btnBuild.Location = new System.Drawing.Point(351, 164);
             this.btnBuild.Name = "btnBuild";
             this.btnBuild.Size = new System.Drawing.Size(100, 73);
@@ -125,6 +127,9 @@
             // 
             // btnBrowse
             // 
+            this.btnBrowse.FlatAppearance.BorderSize = 0;
+            this.btnBrowse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.btnBrowse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
             this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBrowse.Location = new System.Drawing.Point(348, 60);
             this.btnBrowse.Name = "btnBrowse";
@@ -255,6 +260,7 @@
             // btnAdd
             // 
             this.btnAdd.Enabled = false;
+            this.btnAdd.FlatAppearance.BorderSize = 0;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Location = new System.Drawing.Point(348, 100);
             this.btnAdd.Name = "btnAdd";
@@ -403,11 +409,23 @@
             this.llblHelp.Text = "Online Help";
             this.llblHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llblHelp_LinkClicked);
             // 
+            // llblAbout
+            // 
+            this.llblAbout.AutoSize = true;
+            this.llblAbout.Location = new System.Drawing.Point(377, 538);
+            this.llblAbout.Name = "llblAbout";
+            this.llblAbout.Size = new System.Drawing.Size(35, 13);
+            this.llblAbout.TabIndex = 5;
+            this.llblAbout.TabStop = true;
+            this.llblAbout.Text = "About";
+            this.llblAbout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llblAbout_LinkClicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(492, 560);
+            this.Controls.Add(this.llblAbout);
             this.Controls.Add(this.llblHelp);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -467,6 +485,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cboxTemplate;
         private System.Windows.Forms.LinkLabel llblHelp;
+        private System.Windows.Forms.LinkLabel llblAbout;
     }
 }
 

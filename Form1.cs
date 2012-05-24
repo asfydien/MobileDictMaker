@@ -120,7 +120,8 @@ namespace MobileDictMaker
 
                 texts = src[i].Split(new string[] { tbSeparator.Text }, StringSplitOptions.None);
 
-                if (n > nudMaxLine.Value)
+                if (n > nudMaxLine.Value | sPart.Length > nudMaxLen.Value | 
+                    (sPart.Length + texts[0].Length + texts[1].Length) > nudMaxLen.Value)
                 {
                     nPath++;
 
@@ -338,6 +339,15 @@ namespace MobileDictMaker
         private void llblHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/asfydien/MobileDictMaker/wiki");
+        }
+
+        private void llblAbout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show(Application.ProductName + " " + Application.ProductVersion +
+                            "\n© 2012 Sofyan Wahyudin <github.com/asfydien>" +
+                            "\n\nExternal Libraries:\nSharpZipLib <www.icsharpcode.net>",
+                            "About",
+                            MessageBoxButtons.OK);
         }
 
 
