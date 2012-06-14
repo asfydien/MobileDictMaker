@@ -45,6 +45,17 @@ namespace MobileDictMaker
 
         }
 
+        // sorting kata nya saja
+        private int compareKata(string x, string y)
+        {
+
+            string[] s1 = x.Split(new string[] { tbSeparator.Text }, StringSplitOptions.None);
+            string[] s2 = y.Split(new string[] { tbSeparator.Text }, StringSplitOptions.None);
+
+            return s1[0].CompareTo(s2[0]);
+
+        }
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             bool bAlert = false, bExist = false;
@@ -81,6 +92,9 @@ namespace MobileDictMaker
 
                 if (fileName.Equals("") == false & bAlert == false & bExist == false)
                 {
+                    // sorting
+                    Array.Sort(src, compareKata);
+
                     controlAdd(true);
                     btnAdd.Enabled = false;
                 }
@@ -120,6 +134,8 @@ namespace MobileDictMaker
 
                 texts = src[i].Split(new string[] { tbSeparator.Text }, StringSplitOptions.None);
 
+                if (texts.Length > 2) MessageBox.Show("ada dua separator!", ":(", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                 if (n > nudMaxLine.Value | sPart.Length > nudMaxLen.Value | 
                     (sPart.Length + texts[0].Length + texts[1].Length) > nudMaxLen.Value)
                 {
@@ -129,7 +145,7 @@ namespace MobileDictMaker
 
                     sIndex += idxFrom + "#" + idxTo + "#" + nPath + "\n";
 
-                    sPart = texts[0] + "#" + texts[1];
+                    sPart = texts[0] + "#" + texts[1] + "\n";
                     idxFrom = texts[0];
 
                     n = 0;
