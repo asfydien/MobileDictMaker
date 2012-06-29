@@ -70,6 +70,7 @@
             // 
             // btnBuild
             // 
+            this.btnBuild.BackColor = System.Drawing.SystemColors.Control;
             this.btnBuild.Enabled = false;
             this.btnBuild.FlatAppearance.BorderSize = 0;
             this.btnBuild.Location = new System.Drawing.Point(351, 164);
@@ -78,11 +79,12 @@
             this.btnBuild.TabIndex = 0;
             this.btnBuild.Text = "Build Jar";
             this.btnBuild.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBuild.UseVisualStyleBackColor = true;
+            this.btnBuild.UseVisualStyleBackColor = false;
             this.btnBuild.Click += new System.EventHandler(this.btnBuild_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.tbFileSrc);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.tbSeparator);
@@ -127,6 +129,7 @@
             // 
             // btnBrowse
             // 
+            this.btnBrowse.BackColor = System.Drawing.SystemColors.Control;
             this.btnBrowse.FlatAppearance.BorderSize = 0;
             this.btnBrowse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
             this.btnBrowse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
@@ -137,11 +140,12 @@
             this.btnBrowse.TabIndex = 0;
             this.btnBrowse.Text = "Browse...";
             this.btnBrowse.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.UseVisualStyleBackColor = false;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.tbDictInfo);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.tbDictName);
@@ -259,6 +263,7 @@
             // 
             // btnAdd
             // 
+            this.btnAdd.BackColor = System.Drawing.SystemColors.Control;
             this.btnAdd.Enabled = false;
             this.btnAdd.FlatAppearance.BorderSize = 0;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -268,11 +273,12 @@
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.cboxTemplate);
             this.groupBox3.Controls.Add(this.listView1);
@@ -401,6 +407,7 @@
             // llblHelp
             // 
             this.llblHelp.AutoSize = true;
+            this.llblHelp.BackColor = System.Drawing.Color.Transparent;
             this.llblHelp.Location = new System.Drawing.Point(418, 538);
             this.llblHelp.Name = "llblHelp";
             this.llblHelp.Size = new System.Drawing.Size(62, 13);
@@ -412,6 +419,7 @@
             // llblAbout
             // 
             this.llblAbout.AutoSize = true;
+            this.llblAbout.BackColor = System.Drawing.Color.Transparent;
             this.llblAbout.Location = new System.Drawing.Point(377, 538);
             this.llblAbout.Name = "llblAbout";
             this.llblAbout.Size = new System.Drawing.Size(35, 13);
@@ -424,6 +432,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(492, 560);
             this.Controls.Add(this.llblAbout);
             this.Controls.Add(this.llblHelp);
